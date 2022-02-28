@@ -112,7 +112,6 @@ def get_upload_images():
     for subdir, dirs, files in os.walk(rootdir + '\\uploads'):
         for file in files:
             lst.append(os.path.join(file))
-    print(lst)
     return lst
 
 
@@ -125,7 +124,7 @@ def get_image(filename):
 def files():
     if not session.get('logged_in'):
         abort(401)
-        
+
     file_lst = get_upload_images()
     return render_template("files.html",lst=file_lst)
 
