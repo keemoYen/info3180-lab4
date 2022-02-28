@@ -3,9 +3,10 @@
 {% block main %}
 
 	<h3>List</h3>
+	<ul>
 	{% for i in lst %}
-		<li>{{url_for(get_image)}}</li>
+		<li><img src="{{'../../uploads/'+ i}}" width=350 height=250></li>
 	{% endfor %}
-	
+	</ul>
 
-{% endblock %}
+{% endblock %} 

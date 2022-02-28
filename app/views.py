@@ -36,14 +36,11 @@ def upload():
     # Instantiate your form class
     photoform=UploadForm()
     # Validate file upload on submit
-    print(photoform)
-    print('lsfjkssssssssssssssssssssssssssssssssssssl')
     if request.method == 'POST'and photoform.validate_on_submit():
         # Get file data and save to your uploads folder
         photo = request.files['photo']#photoform.photo.data
         print(photo)
         filename = secure_filename(photo.filename)
-        print('------------------------------------------------------------')
         photo.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
         flash('File Saved', 'success')
         return redirect(url_for('home'))
@@ -126,6 +123,9 @@ def get_image(filename):
 
 @app.route('/file')
 def files():
+    if not session.get('logged_in'):
+        abort(401)
+        
     file_lst = get_upload_images()
     return render_template("files.html",lst=file_lst)
 
